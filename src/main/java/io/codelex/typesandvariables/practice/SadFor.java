@@ -1,5 +1,7 @@
 package io.codelex.typesandvariables.practice;
 
+import java.math.BigDecimal;
+
 public class SadFor {
     public static void main(String[] args) {
         System.out.println(test1());
