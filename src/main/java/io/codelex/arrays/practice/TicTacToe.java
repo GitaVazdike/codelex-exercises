@@ -62,8 +62,7 @@ public class TicTacToe {
         }
     }
 
-    public static boolean getWinner() {
-        boolean isWinner = false;
+    public static boolean isWinner() {
         if (board[0][0] != ' ' && board[0][0] == board[0][1] && board[0][1] == board[0][2]
                 || board[1][0] != ' ' && board[1][0] == board[1][1] && board[1][1] == board[1][2]
                 || board[2][0] != ' ' && board[2][0] == board[2][1] && board[2][1] == board[2][2]
@@ -73,13 +72,12 @@ public class TicTacToe {
                 || board[0][0] != ' ' && board[0][0] == board[1][1] && board[1][1] == board[2][2]
                 || board[0][2] != ' ' && board[0][2] == board[1][1] && board[1][1] == board[2][0])
         {
-            isWinner = true;
+            return true;
         }
-        return isWinner;
+        return false;
     }
 
     public static boolean isTie() {
-        boolean tie = false;
         int emptyFieldCount = 0;
 
         for (int r = 0; r < 3; r++) {
@@ -90,17 +88,17 @@ public class TicTacToe {
             }
         }
 
-        if (!getWinner() && emptyFieldCount == 0) {
-            tie = true;
+        if (!isWinner() && emptyFieldCount == 0) {
+            return true;
         }
-        return tie;
+        return false;
     }
 
     public static void checkGameStatus() {
         if (isTie()) {
             gameActive = false;
             System.out.println("The game is a tie.");
-        } else if (getWinner()) {
+        } else if (isWinner()) {
             gameActive = false;
             System.out.println(currentPlayer + " won!");
         }
