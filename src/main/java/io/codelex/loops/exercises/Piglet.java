@@ -1,5 +1,6 @@
 package io.codelex.loops.exercises;
 
+import java.util.Random;
 import java.util.Scanner;
 
 public class Piglet {
@@ -13,7 +14,11 @@ public class Piglet {
 
         if (userInput.equals("y")) {
             do {
-                int rolledNumber = (int) (Math.random() * 6) + 1;
+                Random randomNumber = new Random();
+                int min = 1;
+                int max = 6;
+                int rolledNumber = randomNumber.nextInt((max - min) + 1) + min;
+
                 if (rolledNumber > 1) {
                     points += rolledNumber;
                     System.out.println("You rolled a " + rolledNumber + "!\nRoll again?");

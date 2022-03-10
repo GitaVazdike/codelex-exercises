@@ -10,13 +10,13 @@ public class Exercise4 {
 
         if (input.hasNextInt()) {
             int userInput = input.nextInt();
-            PrintDayInWord(userInput);
+            printDayInWord(userInput);
         } else {
             System.out.println("Invalid input.");
         }
     }
 
-    public static void PrintDayInWord(int dayNumber) {
+    public static void printDayInWord(int dayNumber) {
         String day;
 
         switch (dayNumber) {

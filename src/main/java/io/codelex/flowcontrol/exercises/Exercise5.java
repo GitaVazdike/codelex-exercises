@@ -9,10 +9,10 @@ public class Exercise5 {
         System.out.println("Enter a word: ");
 
         String userInput = input.nextLine().toLowerCase();
-        PhoneKeyPad(userInput);
+        phoneKeyPad(userInput);
 
     }
-    public static void PhoneKeyPad(String word) {
+    public static void phoneKeyPad(String word) {
         int keyPadDigit = 0;
         for(int i = 0; i < word.length(); i++) {
             switch (word.charAt(i)) {
