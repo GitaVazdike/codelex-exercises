@@ -1,12 +1,13 @@
 package io.codelex.loops.exercises;
 
 public class AsciiFigure {
-    public static final int size = 7;
+    private static final int SIZE = 7;
+    private static final int BASE_NUMBER = 8;
 
     public static void main(String[] args) {
-        int figureLength = size * 8 - 8;
-        for (int i = 0; i < size; i++) {
-            int stars = i * 8;
+        int figureLength = SIZE * BASE_NUMBER - BASE_NUMBER;
+        for (int i = 0; i < SIZE; i++) {
+            int stars = i * BASE_NUMBER;
             for (int j = 0; j < figureLength; j++) {
                 int symbolsLeft = (figureLength - stars) / 2;
                 if (j < symbolsLeft) {
