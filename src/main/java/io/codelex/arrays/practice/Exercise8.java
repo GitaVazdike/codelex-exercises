@@ -5,8 +5,14 @@ import java.util.Scanner;
 
 public class Exercise8 {
 
-    private static String[] listOfWords = {"lauva", "hidroelektrostacija", "biezenis", "karātavas", "paprika", "karuselis", "ļaunums", "pērtiķis", "saulriets", "žubīte", "meteņi", "stāvlampa", "koncerttūre"};
-    private static String wordToGuess = pickRandomWord(listOfWords);
+    private static final String[] LIST_OF_WORDS = {
+            "lauva", "hidroelektrostacija", "biezenis",
+            "karātavas", "paprika", "karuselis",
+            "ļaunums", "pērtiķis", "saulriets", "žubīte",
+            "meteņi", "stāvlampa", "koncerttūre"
+    };
+
+    private static String wordToGuess = pickRandomWord(LIST_OF_WORDS);
     private static String guessedLetters = "_".repeat(wordToGuess.length());
     private static String missedGuesses = "";
     private static int numberOfTries = 8;
@@ -44,13 +50,13 @@ public class Exercise8 {
         }
     }
 
-    public static String pickRandomWord(String[] stringArray) {
+    private static String pickRandomWord(String[] stringArray) {
         Random random = new Random();
         int randomIndex = random.nextInt(stringArray.length);
         return stringArray[randomIndex];
     }
 
-    public static boolean checkIfStringContainsLetter(String word, String letter) {
+    private static boolean checkIfStringContainsLetter(String word, String letter) {
         if (!word.contains(letter)) {
             missedGuesses += letter;
             numberOfTries--;
@@ -59,7 +65,7 @@ public class Exercise8 {
         return true;
     }
 
-    public static void fillGuessedLetters(String letter) {
+    private static void fillGuessedLetters(String letter) {
         StringBuilder newGuess = new StringBuilder();
         for (int i = 0; i < wordToGuess.length(); i++) {
             if (wordToGuess.charAt(i) == letter.charAt(0)) {
@@ -73,7 +79,7 @@ public class Exercise8 {
         guessedLetters = newGuess.toString();
     }
 
-    public static boolean isWordGuessed() {
+    private static boolean isWordGuessed() {
         if (guessedLetters.equals(wordToGuess)) {
             System.out.println("Pareizi! Tu uzvarēji! Minamais vārds bija " + wordToGuess.toUpperCase());
             return true;
@@ -81,7 +87,7 @@ public class Exercise8 {
         return false;
     }
 
-    public static String formatWord(String word) {
+    private static String formatWord(String word) {
         StringBuilder formattedString = new StringBuilder();
         for (int i = 0; i < word.length(); i++) {
             formattedString.append(word.charAt(i)).append(" ");
