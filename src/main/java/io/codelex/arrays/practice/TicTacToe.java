@@ -20,12 +20,12 @@ public class TicTacToe {
             int playerRowNumber = keyboard.nextInt();
             int playerColumnNumber = keyboard.nextInt();
 
-            if (playerRowNumber < 0 || playerColumnNumber < 0 || playerRowNumber > 2 || playerColumnNumber > 2) {
+            if (isValidInput(playerRowNumber, playerColumnNumber)) {
                 do {
                     System.out.println("Invalid input. Use numbers 0-2.");
                     playerRowNumber = keyboard.nextInt();
                     playerColumnNumber = keyboard.nextInt();
-                } while (playerRowNumber < 0 || playerColumnNumber < 0 || playerRowNumber > 2 || playerColumnNumber > 2);
+                } while (isValidInput(playerRowNumber, playerColumnNumber));
             }
 
             if (board[playerRowNumber][playerColumnNumber] != ' ') {
@@ -35,22 +35,13 @@ public class TicTacToe {
                     playerColumnNumber = keyboard.nextInt();
                 } while (board[playerRowNumber][playerColumnNumber] != ' ');
             }
-
             makeAMove(playerRowNumber, playerColumnNumber);
             checkGameStatus();
             displayBoard();
         }
     }
 
-    public static void makeAMove(int rowNumber, int columnNumber) {
-        for (int r = 0; r < 3; r++) {
-            for (int c = 0; c < 3; c++) {
-                board[rowNumber][columnNumber] = currentPlayer;
-            }
-        }
-    }
-
-    public static void determinePlayersTurn() {
+    private static void determinePlayersTurn() {
         char playerX = 'X';
         char playerO = 'O';
         if (currentPlayer == playerX) {
@@ -62,22 +53,30 @@ public class TicTacToe {
         }
     }
 
-    public static boolean isWinner() {
-        if (board[0][0] != ' ' && board[0][0] == board[0][1] && board[0][1] == board[0][2]
+    private static boolean isValidInput(int rowNumber, int columNumber) {
+        return rowNumber < 0 || columNumber < 0 || rowNumber > 2 || columNumber > 2;
+    }
+
+    private static void makeAMove(int rowNumber, int columnNumber) {
+        for (int r = 0; r < 3; r++) {
+            for (int c = 0; c < 3; c++) {
+                board[rowNumber][columnNumber] = currentPlayer;
+            }
+        }
+    }
+
+    private static boolean isWinner() {
+        return (board[0][0] != ' ' && board[0][0] == board[0][1] && board[0][1] == board[0][2]
                 || board[1][0] != ' ' && board[1][0] == board[1][1] && board[1][1] == board[1][2]
                 || board[2][0] != ' ' && board[2][0] == board[2][1] && board[2][1] == board[2][2]
                 || board[0][0] != ' ' && board[0][0] == board[1][0] && board[1][0] == board[2][0]
                 || board[0][1] != ' ' && board[0][1] == board[1][1] && board[1][1] == board[2][1]
                 || board[0][2] != ' ' && board[0][2] == board[1][2] && board[1][2] == board[2][2]
                 || board[0][0] != ' ' && board[0][0] == board[1][1] && board[1][1] == board[2][2]
-                || board[0][2] != ' ' && board[0][2] == board[1][1] && board[1][1] == board[2][0])
-        {
-            return true;
-        }
-        return false;
+                || board[0][2] != ' ' && board[0][2] == board[1][1] && board[1][1] == board[2][0]);
     }
 
-    public static boolean isTie() {
+    private static boolean isTie() {
         int emptyFieldCount = 0;
 
         for (int r = 0; r < 3; r++) {
@@ -87,14 +86,10 @@ public class TicTacToe {
                 }
             }
         }
-
-        if (!isWinner() && emptyFieldCount == 0) {
-            return true;
-        }
-        return false;
+        return (!isWinner() && emptyFieldCount == 0);
     }
 
-    public static void checkGameStatus() {
+    private static void checkGameStatus() {
         if (isTie()) {
             gameActive = false;
             System.out.println("The game is a tie.");
@@ -104,13 +99,13 @@ public class TicTacToe {
         }
     }
 
-    public static void initBoard() {
+    private static void initBoard() {
         for (int r = 0; r < 3; r++)
             for (int c = 0; c < 3; c++)
                 board[r][c] = ' ';
     }
 
-    public static void displayBoard() {
+    private static void displayBoard() {
         System.out.println("  0  " + board[0][0] + "|" + board[0][1] + "|" + board[0][2]);
         System.out.println("    --+-+--");
         System.out.println("  1  " + board[1][0] + "|" + board[1][1] + "|" + board[1][2]);

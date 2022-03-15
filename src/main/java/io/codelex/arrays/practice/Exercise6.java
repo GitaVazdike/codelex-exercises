@@ -1,20 +1,19 @@
 package io.codelex.arrays.practice;
 
 import java.util.Arrays;
+import java.util.Random;
 
 public class Exercise6 {
     public static void main(String[] args) {
 
         int[] randomNumberArray = new int[10];
-        int[] randomNumberArray2 = new int[randomNumberArray.length];
 
         for (int i = 0; i < randomNumberArray.length; i++) {
-            randomNumberArray[i] = (int) (Math.random() * 100) + 1;
+            Random random = new Random();
+            randomNumberArray[i] = random.nextInt(100 - 1) + 1;
         }
 
-        for (int i = 0; i < randomNumberArray.length; i++) {
-            randomNumberArray2[i] = randomNumberArray[i];
-        }
+        int[] randomNumberArray2 = randomNumberArray.clone();
 
         randomNumberArray[randomNumberArray.length - 1] = -7;
 
