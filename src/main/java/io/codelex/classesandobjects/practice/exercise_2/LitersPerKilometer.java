@@ -54,13 +54,12 @@ public class LitersPerKilometer {
     }
 
     public static void displayResult(Car car) {
-        System.out.print("Kilometers per liter are: " + String.format("%.2f", car.calculateConsumption()[1]) + "\n");
+        System.out.print("Kilometers per liter are: " + String.format("%.2f", car.kilometersPerLitre()) + "\n");
         if (car.gasHog()) {
             System.out.println("This car is a gas hog.\n");
         } else if (car.economyCar()) {
             System.out.println("This is an economy car.\n");
         }
     }
-
 }
 
