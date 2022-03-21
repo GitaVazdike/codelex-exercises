@@ -2,16 +2,16 @@ package io.codelex.classesandobjects.practice.exercise_7;
 
 public class Dog {
     private String name;
-    private String sex;
+    private Sex sex;
     private String mother;
     private String father;
 
-    public Dog(String name, String sex) {
+    public Dog(String name, Sex sex) {
         this.name = name;
         this.sex = sex;
     }
 
-    public Dog(String name, String sex, String mother, String father) {
+    public Dog(String name, Sex sex, String mother, String father) {
         this.name = name;
         this.sex = sex;
         this.mother = mother;
@@ -29,15 +29,21 @@ public class Dog {
         return father;
     }
 
-    public boolean hasSameMotherAs(Dog otherDog) {
-        return this.mother.equals(otherDog.mother);
+    public String hasSameMotherAs(Dog otherDog) {
+        if (mother == null || otherDog.mother == null) {
+            return "Unknown";
+        } else if (mother.equals(otherDog.mother)) {
+            return "Yes";
+        } else {
+            return "No";
+        }
     }
 
-    @Override
-    public String toString() {
-        return "Dog{" +
-                "name='" + name + '\'' +
-                ", sex='" + sex + '\'' +
-                '}';
+        @Override
+        public String toString () {
+            return "Dog{"
+                    + "name='" + name + '\''
+                    + ", sex='" + sex + '\''
+                    + '}';
+        }
     }
-}

@@ -5,6 +5,9 @@ public class Car {
     private double endKilometers;
     private double liters;
 
+    private static final double GAS_HOG_CONSUMPTION = 15.0;
+    private static final double ECONOMIC_CONSUMPTION = 5.0;
+
 
     public Car(double startOdo, double endingOdo, double liters) {
         startKilometers = startOdo;
@@ -16,27 +19,20 @@ public class Car {
         startKilometers = startOdo;
     }
 
-    public double[] calculateConsumption() {
-        double litersPer100km = liters / (endKilometers - startKilometers) * 100;
-        double kilometersPerLitre = 100 / litersPer100km;
-        double[] ar = new double[2];
-        ar[0] = litersPer100km;
-        ar[1] = kilometersPerLitre;
-        return ar;
+    public double calculateConsumption() {
+        return liters / (endKilometers - startKilometers) * 100;
+    }
+
+    public double kilometersPerLitre() {
+        return 100 / calculateConsumption();
     }
 
     public boolean gasHog() {
-        if (calculateConsumption()[0] > 15.0) {
-            return true;
-        }
-        return false;
+        return calculateConsumption() > GAS_HOG_CONSUMPTION;
     }
 
     boolean economyCar() {
-        if (calculateConsumption()[0] < 5.0) {
-            return true;
-        }
-        return false;
+        return calculateConsumption() < ECONOMIC_CONSUMPTION;
     }
 
     void fillUp(int mileage, double liters) {
