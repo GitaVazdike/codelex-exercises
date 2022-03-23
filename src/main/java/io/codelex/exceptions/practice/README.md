@@ -48,7 +48,7 @@ See [Exercise3.java](Exercise3.java)
 
 ## Exercise #4
 
-See [Exercise4.java](Exercise4.java)
+See [Exercise4.java](exercise4/Exercise4.java)
 
 Define checked exception to handle cases when input is less than 0.
 
