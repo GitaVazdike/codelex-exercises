@@ -6,7 +6,7 @@ import java.util.Scanner;
 
 import static java.time.temporal.TemporalAdjusters.lastDayOfMonth;
 
-public class Exercise_2 {
+public class Exercise2 {
 
     public static void main(String[] args) {
         Scanner input = new Scanner(System.in);
@@ -27,9 +27,13 @@ public class Exercise_2 {
         LocalDate endOfMonthToCheck = startOfMonthToCheck.with(lastDayOfMonth());
 
         for (LocalDate date = serverLaunchDate.plusDays(14); date.isBefore(endOfMonthToCheck); date = date.plusDays(14)) {
-            if (date.getYear() == yearToCheck && date.getMonthValue() == monthAsNumber) {
+            if (isDateTheSame(date, yearToCheck, monthAsNumber)) {
                 System.out.println("Server must be updated on " + date);
             }
         }
+    }
+
+    private static boolean isDateTheSame(LocalDate date, int year, int month) {
+        return (date.getYear() == year && date.getMonthValue() == month);
     }
 }

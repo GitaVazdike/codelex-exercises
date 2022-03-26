@@ -4,7 +4,7 @@ import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.util.Scanner;
 
-public class Exercise_1 {
+public class Exercise1 {
 
     private static final int WORKING_HOURS_PER_DAY = 8;
 
@@ -24,13 +24,15 @@ public class Exercise_1 {
                 + calculateHoursWorked(startDate, endDate) + " hours");
     }
 
+    private static boolean isWeekend(LocalDate date) {
+        return date.getDayOfWeek().equals(DayOfWeek.SATURDAY) || date.getDayOfWeek().equals(DayOfWeek.SUNDAY);
+    }
+
     private static int calculateHoursWorked(LocalDate start, LocalDate end) {
         int dayCount = 0;
 
         for (LocalDate date = start; date.isBefore(end.plusDays(1)); date = date.plusDays(1)) {
-            if (date.getDayOfWeek().equals(DayOfWeek.SATURDAY) || date.getDayOfWeek().equals(DayOfWeek.SUNDAY)) {
-                dayCount += 0;
-            } else {
+            if (!isWeekend(date)) {
                 dayCount++;
             }
         }
