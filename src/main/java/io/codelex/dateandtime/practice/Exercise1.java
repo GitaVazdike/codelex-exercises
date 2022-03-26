@@ -1,4 +1,4 @@
-package io.codelex.practice;
+package io.codelex.dateandtime.practice;
 
 import java.time.DayOfWeek;
 import java.time.LocalDate;

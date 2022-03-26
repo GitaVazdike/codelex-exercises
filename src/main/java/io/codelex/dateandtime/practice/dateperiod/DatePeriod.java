@@ -1,4 +1,4 @@
-package io.codelex.practice.dateperiod;
+package io.codelex.dateandtime.practice.dateperiod;
 
 import java.time.LocalDate;
 
