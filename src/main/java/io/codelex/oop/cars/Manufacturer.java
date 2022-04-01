@@ -44,7 +44,9 @@ public class Manufacturer {
         if (this == o) return true;
         if (!(o instanceof Manufacturer)) return false;
         Manufacturer that = (Manufacturer) o;
-        return getYearOfEstablishment() == that.getYearOfEstablishment() && getName().equals(that.getName()) && getCountry().equals(that.getCountry());
+        return getYearOfEstablishment() == that.getYearOfEstablishment()
+                && getName().equals(that.getName())
+                && getCountry().equals(that.getCountry());
     }
 
     @Override

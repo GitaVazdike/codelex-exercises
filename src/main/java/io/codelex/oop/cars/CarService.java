@@ -1,7 +1,6 @@
 package io.codelex.oop.cars;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.Comparator;
 
 public class CarService {
@@ -29,14 +28,14 @@ public class CarService {
         return carsV12;
     }
 
-    public ArrayList<Car> getCarsProducedBefore1999() {
-        ArrayList<Car> carsBefore1999 = new ArrayList<>();
+    public ArrayList<Car> getCarsProducedBeforeNYear(int year) {
+        ArrayList<Car> carsBeforeNYear = new ArrayList<>();
         for (Car car : cars) {
-            if (car.getYearOfManufacture() < 1999) {
-                carsBefore1999.add(car);
+            if (car.getYearOfManufacture() < year) {
+                carsBeforeNYear.add(car);
             }
         }
-        return carsBefore1999;
+        return carsBeforeNYear;
     }
 
     public Car getMostExpensiveCar() {
@@ -49,10 +48,10 @@ public class CarService {
         return cars.get(0);
     }
 
-    public ArrayList<Car> getCarsWithAtLeastThreeManufacturers() {
+    public ArrayList<Car> getCarsWithAtLeastNManufacturers(int manufacturerCount) {
         ArrayList<Car> carList = new ArrayList<>();
         for (Car car : cars) {
-            if (car.getManufacturerList().size() >= 3) {
+            if (car.getManufacturerList().size() >= manufacturerCount) {
                 carList.add(car);
             }
         }
@@ -83,10 +82,8 @@ public class CarService {
     public ArrayList<Car> getCarsByManufacturer(String titleOfManufacturer) {
         ArrayList<Car> carsWithOneManufacturer = new ArrayList<>();
         for (Car car : cars) {
-            for (Manufacturer manufacturer : car.getManufacturerList()) {
-                if (manufacturer.getName().equalsIgnoreCase(titleOfManufacturer)) {
-                    carsWithOneManufacturer.add(car);
-                }
+            if (car.hasManufacturer(titleOfManufacturer)) {
+                carsWithOneManufacturer.add(car);
             }
         }
         return carsWithOneManufacturer;
