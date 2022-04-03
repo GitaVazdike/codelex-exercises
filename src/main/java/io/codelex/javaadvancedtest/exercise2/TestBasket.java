@@ -1,26 +1,37 @@
 package io.codelex.javaadvancedtest.exercise2;
 
+
 public class TestBasket {
     public static void main(String[] args) throws BasketFullException, BasketEmptyException {
 
         Apple apple = new Apple();
-        Basket<Apple> appleBasket = new Basket<>(apple);
+        Basket<Apple> appleBasket = new Basket<>();
 
-        appleBasket.addToBasket();
+        appleBasket.addToBasket(apple);
+        appleBasket.addToBasket(apple);
         appleBasket.displayBasket();
 
-        for (int i = 1; i <= 10; i++) {
-            appleBasket.addToBasket();
+        try {
+            for (int i = 0; i < 10; i++) {
+                appleBasket.addToBasket(apple);
+            }
+        } catch (BasketFullException e) {
+            System.out.println("Basket is full");
         }
 
         Mushroom mushroom = new Mushroom();
-        Basket<Mushroom> mushroomBasket = new Basket<>(mushroom);
+        Basket<Mushroom> mushroomBasket = new Basket<>();
 
-        mushroomBasket.addToBasket();
+        mushroomBasket.addToBasket(mushroom);
         mushroomBasket.displayBasket();
+        mushroomBasket.removeFromBasket(mushroom);
 
-        mushroomBasket.removeFromBasket();
-        mushroomBasket.removeFromBasket();
-        mushroomBasket.displayBasket();
+        try {
+            mushroomBasket.removeFromBasket(mushroom);
+        } catch (BasketEmptyException e) {
+            System.out.println("Basket is empty");
+        }
+
     }
 }
+

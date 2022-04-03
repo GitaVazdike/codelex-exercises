@@ -1,51 +1,34 @@
 package io.codelex.javaadvancedtest.exercise2;
 
-import io.codelex.javaadvancedtest.exercise1.NotEnoughFundsException;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Basket<T> {
-    private T items;
+    private List<T> items = new ArrayList<>();
     private int numberOfItems = 0;
 
-    public Basket(T items) {
-        this.items = items;
-    }
-
-    public T getItems() {
-        return items;
-    }
-
-    public void setItems(T items) {
-        this.items = items;
-    }
-
-    public int getNumberOfItems() {
-        return numberOfItems;
-    }
-
-    public void setNumberOfItems(int numberOfItems) {
-        this.numberOfItems = numberOfItems;
-    }
-
-    public void addToBasket() throws BasketFullException {
-        if (numberOfItems > 10) {
+    public void addToBasket(T item) throws BasketFullException {
+        if (numberOfItems >= 10) {
             throw new BasketFullException("Basket is full");
-        } else {
-            numberOfItems++;
         }
+        items.add(item);
+        numberOfItems++;
     }
 
-    public void removeFromBasket() throws BasketEmptyException {
-        if (numberOfItems < 0) {
+    public void removeFromBasket(T item) throws BasketEmptyException {
+        if (numberOfItems <= 0) {
             throw new BasketEmptyException("Basket is empty");
         } else {
+            items.remove(item);
             numberOfItems--;
         }
     }
 
     public void displayBasket() {
-        System.out.printf("Item in basket: " + items
+        System.out.println("Content of basket: " + items
                 + ". Number of items: " + numberOfItems + "\n");
     }
+
 }
 
 
