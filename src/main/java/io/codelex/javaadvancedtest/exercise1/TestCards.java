@@ -1,30 +1,34 @@
 package io.codelex.javaadvancedtest.exercise1;
 
+import java.math.BigDecimal;
+
 public class TestCards {
     public static void main(String[] args) throws NotEnoughFundsException {
 
-        Card debitCard = new DebitCard(123456789, "Johny Depp", 456, 1500d);
+        Card debitCard = new DebitCard(123456789, "Johny Depp", "456", BigDecimal.valueOf(1500));
         System.out.println(debitCard);
 
-        debitCard.addMoney(100000);
-
-        debitCard.addMoney(145.52);
+        debitCard.addMoney(BigDecimal.valueOf(145.52));
         System.out.println(debitCard.getBalance());
 
-        debitCard.takeMoney(589);
-        System.out.println(debitCard.getBalance());
+        debitCard.addMoney(BigDecimal.valueOf(100000));
 
-        debitCard.takeMoney(1500);
+        try {
+            debitCard.takeMoney(BigDecimal.valueOf(589));
+            System.out.println(debitCard.getBalance());
 
-        Card creditCard = new CreditCard(987456321, "Anna Field", 123, 150d);
-        System.out.println(creditCard);
+            Card creditCard = new CreditCard(987456321, "Anna Field", "023", BigDecimal.valueOf(150));
+            System.out.println(creditCard);
 
-        creditCard.takeMoney(100);
+            creditCard.takeMoney(BigDecimal.valueOf(100));
 
-        creditCard.addMoney(145.52);
-        System.out.println(debitCard.getBalance());
+            creditCard.addMoney(BigDecimal.valueOf(145.52));
+            System.out.println(creditCard.getBalance());
 
-        creditCard.takeMoney(1500);
+            creditCard.takeMoney(BigDecimal.valueOf(1500));
+        } catch (NotEnoughFundsException e) {
+            System.out.println("Insufficient funds " + e);
+        }
 
     }
 }

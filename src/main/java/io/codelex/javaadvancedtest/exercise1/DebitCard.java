@@ -1,26 +1,18 @@
 package io.codelex.javaadvancedtest.exercise1;
 
+import java.math.BigDecimal;
+
 public class DebitCard extends Card {
 
-    public DebitCard(int cardNumber, String fullName, int ccvCode, double balance) {
+    public DebitCard(int cardNumber, String fullName, String ccvCode, BigDecimal balance) {
         super(cardNumber, fullName, ccvCode, balance);
     }
 
     @Override
-    public void addMoney(double moneyAmount) {
-        if (getBalance() + moneyAmount > 10000) {
+    public void addMoney(BigDecimal moneyAmount) {
+        super.addMoney(moneyAmount);
+        if (getBalance().compareTo(BigDecimal.valueOf(10000)) == 1) {
             displayMessage();
-        } else {
-            setBalance(getBalance() + moneyAmount);
-        }
-    }
-
-    @Override
-    public void takeMoney(double moneyAmount) throws NotEnoughFundsException {
-        if (moneyAmount > getBalance()) {
-            throw new NotEnoughFundsException("Insufficient funds");
-        } else {
-            setBalance(getBalance() - moneyAmount);
         }
     }
 

@@ -1,53 +1,34 @@
 package io.codelex.javaadvancedtest.exercise1;
 
+import java.math.BigDecimal;
+
 abstract class Card {
     private int cardNumber;
     private String fullName;
-    private int ccvCode;
-    private double balance;
+    private String ccvCode;
+    private BigDecimal balance;
 
-    public Card(int cardNumber, String fullName, int ccvCode, double balance) {
+    public Card(int cardNumber, String fullName, String ccvCode, BigDecimal balance) {
         this.cardNumber = cardNumber;
         this.fullName = fullName;
         this.ccvCode = ccvCode;
         this.balance = balance;
     }
 
-    public int getCardNumber() {
-        return cardNumber;
-    }
-
-    public void setCardNumber(int cardNumber) {
-        this.cardNumber = cardNumber;
-    }
-
-    public String getFullName() {
-        return fullName;
-    }
-
-    public void setFullName(String fullName) {
-        this.fullName = fullName;
-    }
-
-    public int getCcvCode() {
-        return ccvCode;
-    }
-
-    public void setCcvCode(int ccvCode) {
-        this.ccvCode = ccvCode;
-    }
-
-    public double getBalance() {
+    public BigDecimal getBalance() {
         return balance;
     }
 
-    public void setBalance(double balance) {
-        this.balance = balance;
+    public void addMoney(BigDecimal moneyAmount) {
+        balance = balance.add(moneyAmount);
     }
 
-    public abstract void addMoney(double moneyAmount);
-
-    public abstract void takeMoney(double moneyAmount) throws NotEnoughFundsException;
+    public void takeMoney(BigDecimal moneyAmount) throws NotEnoughFundsException {
+        if (moneyAmount.compareTo(getBalance()) == 1) {
+            throw new NotEnoughFundsException("Insufficient funds");
+        }
+        balance = balance.subtract(moneyAmount);
+    }
 
     public abstract void displayMessage();
 
@@ -56,7 +37,7 @@ abstract class Card {
         return "Card{"
                 + "cardNumber=" + cardNumber
                 + ", fullName='" + fullName + '\''
-                + ", ccvCode=" + ccvCode
+                + ", ccvCode='" + ccvCode + '\''
                 + ", balance=" + balance
                 + '}';
     }
