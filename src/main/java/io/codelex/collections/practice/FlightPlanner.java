@@ -9,17 +9,17 @@ import java.nio.file.Paths;
 import java.util.*;
 
 public class FlightPlanner {
-    private static final Charset charset = Charset.defaultCharset();
-    private static final String file = "/collections/flights.txt";
-    private static List<String[]> listOfStartCitiesAndDestinations = new ArrayList<>();
-    private static List<String> listOfCities = new ArrayList<>();
-    private static Map<String, List<String>> mapOfStartCitiesAndDestinations = new HashMap<>();
+    private static final Charset CHARSET = Charset.defaultCharset();
+    private static final String FILE = "/collections/flights.txt";
+    private static final List<String[]> LIST_OF_START_CITIES_AND_DESTINATIONS = new ArrayList<>();
+    private static final List<String> LIST_OF_CITIES = new ArrayList<>();
+    private static final Map<String, List<String>> START_CITIES_AND_DESTINATIONS = new HashMap<>();
 
     public static void main(String[] args) throws IOException, URISyntaxException {
         Scanner in = new Scanner(System.in);
 
-        final Path path = Paths.get(Histogram.class.getResource(file).toURI());
-        List<String> lines = Files.readAllLines(path, charset);
+        final Path path = Paths.get(Histogram.class.getResource(FILE).toURI());
+        List<String> lines = Files.readAllLines(path, CHARSET);
 
         setCityPairs(lines);
         setListOfCities();
@@ -28,11 +28,11 @@ public class FlightPlanner {
         while (true) {
             System.out.println("What would you like to do:\nTo display list of the cities press 1\nTo exit program press #");
             String userInput = in.nextLine();
-            if (!userInput.equals("1") && !userInput.equals("#")) {
+            if (!isValidInput(userInput)) {
                 System.out.println("Invalid input, try again...\n");
                 continue;
             } else if (userInput.equals("1")) {
-                System.out.println(listOfCities);
+                System.out.println(LIST_OF_CITIES);
                 System.out.println("Enter the name of the city you want to travel from:");
                 userInput = in.nextLine();
                 processUserInput(userInput, in);
@@ -42,28 +42,32 @@ public class FlightPlanner {
         }
     }
 
+    private static boolean isValidInput(String input) {
+        return input.equals("1") || input.equals("#");
+    }
+
     private static void setCityPairs(List<String> textLines) {
         for (String line : textLines) {
             String[] startCityAndDestination = line.split(" -> ");
-            listOfStartCitiesAndDestinations.add(startCityAndDestination);
+            LIST_OF_START_CITIES_AND_DESTINATIONS.add(startCityAndDestination);
         }
     }
 
     private static void setListOfCities() {
-        for (String[] cities : listOfStartCitiesAndDestinations) {
-            if (!listOfCities.contains(cities[0])) {
-                listOfCities.add(cities[0]);
+        for (String[] cities : LIST_OF_START_CITIES_AND_DESTINATIONS) {
+            if (!LIST_OF_CITIES.contains(cities[0])) {
+                LIST_OF_CITIES.add(cities[0]);
             }
         }
     }
 
     private static void setMapOfStartCitiesAndDestinations() {
-        for (String listOfCity : listOfCities) {
+        for (String listOfCity : LIST_OF_CITIES) {
             List<String> destinations = new ArrayList<>();
-            for (int j = 0; j < listOfStartCitiesAndDestinations.size(); j++) {
-                if (listOfCity.equals(listOfStartCitiesAndDestinations.get(j)[0])) {
-                    destinations.add(listOfStartCitiesAndDestinations.get(j)[1]);
-                    mapOfStartCitiesAndDestinations.put(listOfCity, destinations);
+            for (int j = 0; j < LIST_OF_START_CITIES_AND_DESTINATIONS.size(); j++) {
+                if (listOfCity.equals(LIST_OF_START_CITIES_AND_DESTINATIONS.get(j)[0])) {
+                    destinations.add(LIST_OF_START_CITIES_AND_DESTINATIONS.get(j)[1]);
+                    START_CITIES_AND_DESTINATIONS.put(listOfCity, destinations);
                 }
             }
         }
@@ -78,7 +82,7 @@ public class FlightPlanner {
                 break;
             }
             route.add(cityToTravelFrom);
-            System.out.println(mapOfStartCitiesAndDestinations.get(cityToTravelFrom)
+            System.out.println(START_CITIES_AND_DESTINATIONS.get(cityToTravelFrom)
                     + "\nEnter the name of the city you want to travel from:");
             cityToTravelFrom = in.nextLine();
         }

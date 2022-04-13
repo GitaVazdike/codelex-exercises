@@ -13,7 +13,7 @@ public class Exercise5 {
 
     public static boolean isHappyNumber(int number) {
         List<Integer> uniqueNumbers = new ArrayList<>();
-
+        int happyNumber = 1;
         while (!uniqueNumbers.contains(number)) {
             uniqueNumbers.add(number);
             int value = 0;
@@ -22,8 +22,9 @@ public class Exercise5 {
                 number /= 10;
             }
             number = value;
+
         }
-        return number == 1;
+        return number == happyNumber;
     }
 }
 
