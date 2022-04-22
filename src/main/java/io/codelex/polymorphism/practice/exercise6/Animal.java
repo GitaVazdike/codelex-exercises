@@ -3,9 +3,9 @@ package io.codelex.polymorphism.practice.exercise6;
 import java.text.DecimalFormat;
 
 abstract class Animal {
-    private String animalType;
-    private String animalName;
-    private double animalWeight;
+    private final String animalType;
+    private final String animalName;
+    private final double animalWeight;
     private Integer foodEaten;
     DecimalFormat format = new DecimalFormat("0.#");
 
