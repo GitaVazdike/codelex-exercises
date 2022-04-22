@@ -7,8 +7,6 @@ import java.util.Scanner;
 
 public class AnimalFeedingMain {
 
-    private static Food food = null;
-    private static Animal animal = null;
     private static List<Animal> animals = new ArrayList<>();
 
     public static void main(String[] args) {
@@ -27,19 +25,20 @@ public class AnimalFeedingMain {
             System.out.println("Enter info: {FoodType} {quantity}");
             String[] foodInfo = input.nextLine().split(" ");
 
-            setAnimal(animalInfo);
-            setFood(foodInfo);
+            createAnimal(animalInfo);
+            createFood(foodInfo);
 
-            animal.makeSound();
-            animal.eat(food);
+            createAnimal(animalInfo).makeSound();
+            createAnimal(animalInfo).eat(createFood(foodInfo));
 
-            System.out.println(animal);
+            System.out.println(createAnimal(animalInfo));
 
-            animals.add(animal);
+            animals.add(createAnimal(animalInfo));
         }
     }
 
-    private static void setAnimal(String[] animalInfo) {
+    private static Animal createAnimal(String[] animalInfo) {
+        Animal animal = null;
         if (animalInfo[0].equalsIgnoreCase("cat")) {
             animal = new Cat(animalInfo[0], animalInfo[1], Double.parseDouble(animalInfo[2]),
                     0, animalInfo[3], animalInfo[4]);
@@ -53,9 +52,11 @@ public class AnimalFeedingMain {
             animal = new Zebra(animalInfo[0], animalInfo[1], Double.parseDouble(animalInfo[2]),
                     0, animalInfo[3]);
         }
+        return animal;
     }
 
-    private static void setFood(String[] foodInfo) {
+    private static Food createFood(String[] foodInfo) {
+        Food food;
         String foodType = foodInfo[0];
         int quantity = Integer.parseInt(foodInfo[1]);
 
@@ -64,6 +65,7 @@ public class AnimalFeedingMain {
         } else {
             food = new Meat(quantity);
         }
+        return food;
     }
 }
 

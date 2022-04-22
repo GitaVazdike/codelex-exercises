@@ -3,6 +3,7 @@ package io.codelex.polymorphism.practice.exercise1;
 public class Ford implements Car, CarWithBoost {
     private Integer currentSpeed = 0;
 
+    @Override
     public Integer getCurrentSpeed() {
         return currentSpeed;
     }

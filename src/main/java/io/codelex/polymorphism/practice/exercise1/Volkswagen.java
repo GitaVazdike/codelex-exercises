@@ -3,6 +3,7 @@ package io.codelex.polymorphism.practice.exercise1;
 public class Volkswagen implements Car {
     private Integer currentSpeed = 0;
 
+    @Override
     public Integer getCurrentSpeed() {
         return currentSpeed;
     }
@@ -15,7 +16,6 @@ public class Volkswagen implements Car {
     @Override
     public void slowDown() {
         currentSpeed -= 11;
-
     }
 
     @Override
