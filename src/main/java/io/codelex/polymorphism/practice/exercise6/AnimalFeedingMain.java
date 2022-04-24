@@ -25,47 +25,43 @@ public class AnimalFeedingMain {
             System.out.println("Enter info: {FoodType} {quantity}");
             String[] foodInfo = input.nextLine().split(" ");
 
-            createAnimal(animalInfo);
-            createFood(foodInfo);
+            Animal animal = createAnimal(animalInfo);
+            Food food = createFood(foodInfo);
 
-            createAnimal(animalInfo).makeSound();
-            createAnimal(animalInfo).eat(createFood(foodInfo));
+            animal.makeSound();
+            animal.eat(food);
 
-            System.out.println(createAnimal(animalInfo));
+            System.out.println(animal);
 
-            animals.add(createAnimal(animalInfo));
+            animals.add(animal);
         }
     }
 
     private static Animal createAnimal(String[] animalInfo) {
-        Animal animal = null;
         if (animalInfo[0].equalsIgnoreCase("cat")) {
-            animal = new Cat(animalInfo[0], animalInfo[1], Double.parseDouble(animalInfo[2]),
+            return new Cat(animalInfo[0], animalInfo[1], Double.parseDouble(animalInfo[2]),
                     0, animalInfo[3], animalInfo[4]);
         } else if (animalInfo[0].equalsIgnoreCase("mouse")) {
-            animal = new Mouse(animalInfo[0], animalInfo[1], Double.parseDouble(animalInfo[2]),
+            return new Mouse(animalInfo[0], animalInfo[1], Double.parseDouble(animalInfo[2]),
                     0, animalInfo[3]);
         } else if (animalInfo[0].equalsIgnoreCase("tiger")) {
-            animal = new Tiger(animalInfo[0], animalInfo[1], Double.parseDouble(animalInfo[2]),
+            return new Tiger(animalInfo[0], animalInfo[1], Double.parseDouble(animalInfo[2]),
                     0, animalInfo[3]);
-        } else if (animalInfo[0].equalsIgnoreCase("zebra")) {
-            animal = new Zebra(animalInfo[0], animalInfo[1], Double.parseDouble(animalInfo[2]),
+        } else {
+            return new Zebra(animalInfo[0], animalInfo[1], Double.parseDouble(animalInfo[2]),
                     0, animalInfo[3]);
         }
-        return animal;
     }
 
     private static Food createFood(String[] foodInfo) {
-        Food food;
         String foodType = foodInfo[0];
         int quantity = Integer.parseInt(foodInfo[1]);
 
         if (foodType.equalsIgnoreCase("vegetable")) {
-            food = new Vegetable(quantity);
+            return new Vegetable(quantity);
         } else {
-            food = new Meat(quantity);
+            return new Meat(quantity);
         }
-        return food;
     }
 }
 
